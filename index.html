@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/estilo.css">
+  <link rel="stylesheet" href="css/breakpoints.css">
 </head>
 
 <body>
@@ -12,17 +13,31 @@
   <header class="header">
     <!-- TITLE -->
     <h1 class="h1">Ruleta La Agonias</h1>
-
-
   </header>
+
+  <!-- CONTAINER ABOVE THE GAME -->
+  <div class="container">
+    <!-- NUMBER  -->
+    <div class="number-div">
+      <h3 class="number">Numero</h3>
+    </div>
+    <!-- TEXT "ways to call roulette" -->
+    <div class="call-roulette__div">
+    <h3 class="call-roulette">Estas son algunas formas de llamar
+      a la ruleta para que te de suerte</h3>
+    </div>
+
+  </div>
+
   <!-- ZONE GAME -->
-  <container class="container">
+  <container class="container-game">
     <!-- ZONE RULETTE -->
 
-
-    <img src="./assets/images/5c165529b0164202f1cf04d6-removebg-preview.png" width="400px" id="roulette" />
-
+    <div class="roulette">
+      <img src="./assets/images/5c165529b0164202f1cf04d6-removebg-preview.png" width="400px" class="img-roulette" />
+    </div>
     <!-- ZONE BOARD -->
+    <div class="board-div">
     <section class="board">
       <!-- FIRST COLUMN -->
       <p class="cero background-transparent">0</p>
@@ -94,18 +109,10 @@
       <p class="color-red background-red"></p>
 
     </section>
-
+  </div>
 
 
   </container>
-
-
-
-
-
-
-
-
 
 
 

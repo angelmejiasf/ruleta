@@ -15,10 +15,40 @@ text-align: center;
 background-color: gray;
 margin: 20px;}
 
-/* ZONE GAME */
+/* CONTAINER ABOVE THE GAME */
 .container{
+    max-width: 1500px;
+    width: 100%;
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-between;
+    margin-bottom: 100px;
+}
+/* NUMBER */
+.number-div{
+    width: 35%;
+    text-align: center;
+}
+.number{
+    font-family: roboto medium;
     
-    max-width: 1700px;
+}
+/* WAYS TO CALL ROULETTE */
+.call-roulette__div{
+    width: 65%;
+    text-align: end;
+}
+.call-roulette{
+    
+    
+    font-family: roboto medium;
+    
+}
+
+/* ZONE GAME */
+.container-game{
+    
+    max-width: 1500px;
     width: 100%;
     /* min-height: 800px;
     height: 100%; */
@@ -36,9 +66,10 @@ margin: 20px;}
 
 /* ZONE RULETA */
 .roulette {
-    width: 100%;
+    text-align: center;
+    width: 35%;
     
-  }
+  /* }
   #roulette:hover {
     animation: move 1s linear 0s infinite;
   }
@@ -50,16 +81,19 @@ margin: 20px;}
   @keyframes move {
     100% {
       transform: rotateZ(360deg);
-    }
+    } */
   }
 /*ZONE BOARD */
+.board-div{
+    width: 65%;
+}
 .board{ 
     display: grid;
     text-align: center;
     grid-template-columns: repeat(14,1fr);
     grid-template-rows: repeat(5,80px);
     
-    width: 70%;
+    
     
     align-items: center;
     

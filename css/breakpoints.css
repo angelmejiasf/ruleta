@@ -1,0 +1,19 @@
+@media (max-width:1166px) {
+    .call-roulette__div{
+        display: none;
+    }
+    .container-game{
+        flex-direction: column;
+    }
+    .roulette{
+        width: 80%;
+    }
+    .img-roulette{
+        width: 300px;
+    }
+    .board-div{
+        width: 80%;
+    }
+
+    
+}
