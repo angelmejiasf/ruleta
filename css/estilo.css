@@ -10,15 +10,18 @@ body{
 /*ZONE HEADER */
 
 /* TITLE */
-.h1{font-family: roboto medium;}
+.h1{font-family: roboto medium;
+text-align: center;
+background-color: gray;
+margin: 20px;}
 
 /* ZONE GAME */
 .container{
     
     max-width: 1700px;
     width: 100%;
-    min-height: 800px;
-    height: 100%;
+    /* min-height: 800px;
+    height: 100%; */
     margin: 0 auto;
     
     display: flex;
@@ -30,6 +33,25 @@ body{
     
     
 }
+
+/* ZONE RULETA */
+.roulette {
+    width: 100%;
+    
+  }
+  #roulette:hover {
+    animation: move 1s linear 0s infinite;
+  }
+
+  #roulette:active {
+    animation-play-state: paused;
+  }
+
+  @keyframes move {
+    100% {
+      transform: rotateZ(360deg);
+    }
+  }
 /*ZONE BOARD */
 .board{ 
     display: grid;
