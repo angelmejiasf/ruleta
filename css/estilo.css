@@ -1,0 +1,264 @@
+@font-face {
+    font-family: roboto medium;
+    src: url(../assets/fonts/Roboto-Medium.ttf);
+}
+
+/* BACKGROUND GENERAL */
+body{
+    background-color: #004A22;}
+
+/*ZONE HEADER */
+
+/* TITLE */
+.h1{font-family: roboto medium;}
+
+/* ZONE GAME */
+.container{
+    width: 1000px;
+    margin: 0 auto;
+}
+/*ZONE BOARD */
+.board{ 
+    display: grid;
+    text-align: center;
+    align-items: center;
+    grid-template-columns: repeat(14,1fr);
+    grid-template-rows: repeat(5,80px);
+    grid-gap: 0px;
+    width: 60%;
+    border: solid 2px white;
+    /* grid-template-areas: 
+    "cero numbers set"
+    "cero numbers set"
+    "cero numbers set"
+    " "; */
+}
+
+/* BACKGROUNDS COLOR NUMBERS */
+.background-black{
+    background-color: black;
+    color: white;
+}
+
+.background-red{
+    background-color: red;
+    color: white;
+    
+}
+
+.background-transparent{
+    background-color: transparent;
+    color: white;
+}
+
+/* NUMBERS AND SETS POSITIONS */
+
+    /* FIRST COLUMN */
+        .cero{
+            grid-column: 1/2;
+            grid-row: 1/4;
+            
+            
+        }
+
+    /* SECOND COLUMN */
+        .numbers-one{
+            grid-column: 2/3;
+            grid-row: 3/4;
+            
+            
+        }
+
+        .numbers-two{
+            grid-column: 2/3;
+            grid-row:2/3 ;
+            
+        }
+        .numbers-three{
+            grid-column: 2/3;
+            grid-row: 1/2;
+        }
+    /* THREE COLUMN */
+        .numbers-four{
+            grid-column: 3/4;
+            grid-row: 3/4;
+        }
+        .numbers-five{
+            grid-column: 3/4;
+            grid-row: 2/3;
+        }
+        .numbers-six{
+            grid-column: 3/4;
+            grid-row: 1/2;
+        }
+
+    /* QUARTER COLUMN */
+        .numbers-seven{
+            grid-column: 4/5;
+            grid-row: 3/4;
+        }
+
+        .numbers-eight{
+            grid-column: 4/5;
+            grid-row: 2/3;
+        }
+
+        .numbers-nine{
+            grid-column: 4/5;
+            grid-row: 1/2;
+        }
+    
+     /*FIFTH COLUMN */
+        .numbers-ten{
+            grid-column: 5/6;
+            grid-row: 3/4;
+        }
+        .numbers-eleven{
+            grid-column: 5/6;
+            grid-row: 2/3;
+        }
+        .numbers-twelve{
+            grid-column: 5/6;
+            grid-row: 1/2;
+        }
+
+    /* SIXTH COLUMN */
+        .numbers-thirteen{
+            grid-column: 6/7;
+            grid-row: 3/4;
+        }
+        .numbers-fourteen{
+            grid-column: 6/7;
+            grid-row: 2/3;
+        }
+        .numbers-fifteen{
+            grid-column: 6/7;
+            grid-row:1/2;
+        }
+    
+    /*SEVENTH COLUMN  */
+        .numbers-sixteen{
+            grid-column: 7/8;
+            grid-row: 3/4;
+        }
+        .numbers-seventeen{
+            grid-column: 7/8;
+            grid-row:2/3;
+        }
+        .numbers-eighteen{
+            grid-column: 7/8;
+            grid-row:1/2;
+        }
+    /* EIGHTH COLUMN */
+        .numbers-nineteen{
+            grid-column: 8/9;
+            grid-row:3/4;
+        }
+        .numbers-twenty{
+            grid-column: 8/9;
+            grid-row: 2/3;
+        }
+        .numbers-twentyone{
+            grid-column: 8/9;
+            grid-row: 1/2;
+        }
+    /* NINTH COLUMN */
+        .numbers-twentytwo{
+            grid-column: 9/10;
+            grid-row:3/4;
+        }
+        .numbers-twentythree{
+            grid-column: 9/10;
+            grid-row:2/3;
+        }
+        .numbers-twentyfour{
+            grid-column: 9/10;
+            grid-row:1/2;
+        }
+    /* TENTH COLUMN */
+        .numbers-twentyfive{
+            grid-column: 10/11;
+            grid-row: 3/4;
+        }
+        .numbers-twentysix{
+            grid-column: 10/11;
+            grid-row:2/3;
+        }
+        .numbers-twentyseven{
+            grid-column: 10/11;
+            grid-row: 1/2;
+        }
+    /* ELEVENTH COLUMN */
+        .numbers-twentyeight{
+            grid-column: 11/12;
+            grid-row: 3/4;
+        }
+        .numbers-twentynine{
+            grid-column: 11/12;
+            grid-row:2/3;
+        }
+        .numbers-thirty{
+            grid-column: 11/12;
+            grid-row: 1/2;
+        }
+    /* TWELFTH COLUMN */
+        .numbers-thirtyone{
+            grid-column: 12/13;
+            grid-row: 3/4;
+        }
+        .numbers-thirtytwo{
+            grid-column: 12/13;
+            grid-row:2/3;
+        }
+        .numbers-thirtythree{
+            grid-column: 12/13;
+            grid-row: 1/2;
+        }
+    /* THIRTEENTH COLUMN */
+        .numbers-thirtyfour{
+            grid-column: 13/14;
+            grid-row: 3/4;
+        }
+        .numbers-thirtyfive{
+            grid-column: 13/14;
+            grid-row:2/3;
+        }
+        .numbers-thirtysix{
+            grid-column: 13/14;
+            grid-row: 1/2;
+        }
+    
+    /* DOWN AREA */
+        .set-two-1 {
+            grid-column: 2/6;
+            grid-row: 4/5;
+        }
+        .set-two-2{
+            grid-column: 6/10;
+            grid-row: 4/5;
+        }
+        .set-two-3{
+            grid-column: 10/14;
+            grid-row:4/5;
+            
+        }
+
+        .set-three-1{
+            grid-column: 2/4;
+            grid-row: 5/6;
+        }
+
+        .set-three-2{
+            grid-column: 12/14;
+            grid-row: 5/6;
+        }
+
+        .even{
+            grid-column: 4/6;
+            grid-row: 5/6;
+        }
+
+        .odd{
+            grid-column: 10/12;
+            grid-row: 5/6;
+        }
