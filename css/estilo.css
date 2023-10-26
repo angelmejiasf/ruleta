@@ -14,41 +14,69 @@ body{
 
 /* ZONE GAME */
 .container{
-    width: 1000px;
+    
+    max-width: 1700px;
+    width: 100%;
+    min-height: 800px;
+    height: 100%;
     margin: 0 auto;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
+    
+    
+    
 }
 /*ZONE BOARD */
 .board{ 
     display: grid;
     text-align: center;
-    align-items: center;
     grid-template-columns: repeat(14,1fr);
     grid-template-rows: repeat(5,80px);
-    grid-gap: 0px;
-    width: 60%;
-    border: solid 2px white;
-    /* grid-template-areas: 
-    "cero numbers set"
-    "cero numbers set"
-    "cero numbers set"
-    " "; */
+    
+    width: 70%;
+    
+    align-items: center;
+    
+    
+    
 }
 
 /* BACKGROUNDS COLOR NUMBERS */
 .background-black{
     background-color: black;
     color: white;
+    border: solid 2px white;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    
+    
 }
 
 .background-red{
     background-color: red;
     color: white;
-    
+    border: solid 2px white;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .background-transparent{
     background-color: transparent;
     color: white;
+    border: solid 2px white;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* NUMBERS AND SETS POSITIONS */
@@ -57,17 +85,24 @@ body{
         .cero{
             grid-column: 1/2;
             grid-row: 1/4;
+
             
             
         }
+      
+        
 
     /* SECOND COLUMN */
         .numbers-one{
             grid-column: 2/3;
             grid-row: 3/4;
+            background-color: red;
+            
             
             
         }
+        
+      
 
         .numbers-two{
             grid-column: 2/3;
@@ -261,4 +296,13 @@ body{
         .odd{
             grid-column: 10/12;
             grid-row: 5/6;
+        }
+
+        .color-black{
+            grid-column: 6/8;
+            grid-row: 5/6;
+        }
+        .color-red{
+            grid-column: 8/10;
+            grid-row:5/6;
         }
