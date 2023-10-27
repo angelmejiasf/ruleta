@@ -14,6 +14,25 @@
     .board-div{
         width: 80%;
     }
+    .number-div{
+        width: 100%;
+    }
+    .container{
+        text-align: center;
+    }
 
     
+}
+
+@media (max-width:450px) {
+    .img-roulette{
+        width: 200px;
+    }
+    
+}
+
+@media (max-width:311px) {
+    .img-roulette{
+        width: 150px;
+    }
 }
