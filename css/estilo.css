@@ -22,7 +22,7 @@ margin: 20px;}
     display: flex;
     margin: 0 auto;
     justify-content: space-between;
-    margin-bottom: 100px;
+    margin-bottom: 40px;
 }
 /* NUMBER */
 .number-div{
@@ -42,6 +42,12 @@ margin: 20px;}
     
     
     font-family: roboto medium;
+    
+}
+
+.call-roulette__phrases{
+    font-family: roboto medium;
+    color: white;
     
 }
 
@@ -389,13 +395,25 @@ margin: 20px;}
     border:transparent;
 }
 
+.insert{
+    font-family: roboto medium;
+    background-color: transparent;
+    
+}
+.error{
+    color: red;
+    font-family: roboto medium;
+}
+.cartera{
+    display: none;
+}
 /* TOKENS */
 .tokens{
     display: grid;
     grid-template-columns: repeat(5,150px);
     width: 65%;
     justify-content: center;
-    display: none;
+    /* display: none; */
     
     
 }
@@ -411,24 +429,29 @@ margin: 20px;}
     display: flex;
     align-items: center;
     justify-content: center;
+    display: none;
 }
 
 .diez{
     width: 80px;
     grid-column: 2/3;
+    display: none;
 }
 
 .veinticinco{
     width: 80px;
     grid-column: 3/4;
+    display: none;
 }
 
 .cincuenta{
     width:80px ;
     grid-column: 4/5;
+    display: none;
 }
 
 .cien{
     width: 80px;
     grid: 5/6;
+    display: none;
 }

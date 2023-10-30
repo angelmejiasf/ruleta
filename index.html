@@ -25,6 +25,7 @@
     <div class="call-roulette__div">
     <h3 class="call-roulette">Estas son algunas formas de llamar
       a la ruleta para que te de suerte</h3>
+      <p class="call-roulette__phrases" id="frases"></p>
     </div>
 
   </div>
@@ -38,7 +39,7 @@
     </div>
     <!-- ZONE BOARD -->
     <div class="board-div">
-    <section class="board">
+    <section class="board" id="board">
       <!-- FIRST COLUMN -->
       <p class="cero background-transparent">0</p>
       <!-- SECOND COLUMN -->
@@ -117,18 +118,22 @@
   <!-- BELOW THE GAME -->
   <div class="container-below">
     <!-- INSERT MONEY -->
-    <div class="money">
-      <p>Introduce la cantidad con la que quieres jugar:</p>
-      <input class="input" placeholder="€">
+    <div class="money" id="money">
+      <p id="title__money">Introduce la cantidad con la que quieres jugar:</p>
+      <input class="input" id="input" placeholder="€"><br>
+      <button id="insert" class="insert">Insertar</button>
+      <p id="error" class="error"></p>
+      <p id="cartera" class="cartera">Cartera:</p>
     </div>
+    
     <!-- TOKENS -->
-    <div class="tokens">
+    <div class="tokens" id="tokens">
       
-      <div class="token"><img src="./assets/images/1 (1).png" class="uno"></div>
-      <div class="token"><img src="./assets/images/10 (1).png" class="diez"></div>
-      <div class="token"><img src="./assets/images/25 (1).png" class="veinticinco"></div>
-      <div class="token"><img src="./assets/images/50 (1).png" class="cincuenta"></div>
-      <div class="token"><img src="./assets/images/100.png" class="cien"></div>
+      <div class="token"><img src="./assets/images/1 (1).png" class="uno" id="uno"></div>
+      <div class="token"><img src="./assets/images/10 (1).png" class="diez" id="diez"></div>
+      <div class="token"><img src="./assets/images/25 (1).png" class="veinticinco" id="veinticinco"></div>
+      <div class="token"><img src="./assets/images/50 (1).png" class="cincuenta" id="cincuenta"></div>
+      <div class="token"><img src="./assets/images/100.png" class="cien" id="cien"></div>
 
 
     </div>
