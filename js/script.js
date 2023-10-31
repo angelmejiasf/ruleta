@@ -15,11 +15,9 @@ let frases = [
     "La Chupa Sangre",
     "La Humilla Pelas",
     "La Fabrica Ilusiones",
-
-]
+];
 
 // VARIABLES
-
 let phrases = document.getElementById("frases");
 let input = document.getElementById("input");
 let insert = document.getElementById("insert");
@@ -32,84 +30,106 @@ let fichacien = document.getElementById("cien");
 let money = document.getElementById("money");
 let titlemoney = document.getElementById("title__money");
 let cartera = document.getElementById("cartera");
-let tokens=document.getElementById("tokens");
-let board=document.getElementById("board")
+let tokens = document.getElementById("tokens");
+let board = document.getElementById("board");
+let fichaValor = 0;
 
-// FUNCTIONS
-function generatePharases() {
+
+// Functions
+function generatePhrases() {
     for (let i = 0; i < 3; i++) {
         let random = Math.floor(Math.random() * frases.length);
         let phrasegenerate = frases[random];
         phrases.innerHTML += phrasegenerate + "<br>";
     }
-
-
-
 }
 
-document.addEventListener("DOMContentLoaded", generatePharases)
+document.addEventListener("DOMContentLoaded", generatePhrases);
 
 // INSERT MONEY
 function insertMoney() {
+    const inputValue = parseFloat(input.value);
 
-
-    if (input.value <= 1) {
-        error.textContent = "Debes insertar mas de 1€ para jugar"
-    }
-    if (input.value >= 1) {
+    if (isNaN(inputValue) || inputValue < 1) {
+        error.textContent = "Debes insertar más de 1€ para jugar";
+    } else {
         fichauno.style.display = "flex";
         error.textContent = "";
+        acumularCartera(inputValue);
 
-
-        if (input.value >= 10) {
+        if (inputValue >= 10) {
             fichadiez.style.display = "flex";
-
         }
-        if (input.value >= 25) {
-            fichaveinticinco.style.display = "flex"
+        if (inputValue >= 25) {
+            fichaveinticinco.style.display = "flex";
         }
-
-        if (input.value >= 50) {
+        if (inputValue >= 50) {
             fichacincuenta.style.display = "flex";
-
         }
-
-        if (input.value >= 100) {
+        if (inputValue >= 100) {
             fichacien.style.display = "flex";
         }
 
         input.style.display = "none";
         insert.style.display = "none";
         titlemoney.style.display = "none";
-        cartera.style.display = "block"
+        cartera.style.display = "block";
     }
 }
 
-insert.addEventListener("click", insertMoney)
+insert.addEventListener("click", insertMoney);
 
 // SELECT TOKEN
 let imgsrc;
-function selectToken(event){
-    if(event.target.tagName=="IMG"){
-        imgsrc=event.target.getAttribute("src")
-        
+function selectToken(event) {
+    if (event.target.tagName == "IMG") {
+        imgsrc = event.target.getAttribute("src");
+        fichaValor = parseFloat(event.target.getAttribute("value"));
     }
 }
 
-tokens.addEventListener("click",selectToken)
+tokens.addEventListener("click", selectToken);
 
 // SELECT GRID
-function grid(event){
-    if (event.target.tagName === 'P') {
-        const casilla = event.target;
-    
-        // Crea una imagen
-        const imagen = document.createElement('img');
-        imagen.style.width="50px"
-        imagen.src = imgsrc;
+function grid(event) {
+    if (imgsrc.trim() !== "") {
+        if (event.target.tagName === 'P') {
+            const casilla = event.target;
 
-        casilla.appendChild(imagen);
+            // Check if the cell already contains an image
+            if (casilla.getElementsByTagName('img').length === 0) {
+                addFichaToBoard(casilla);
+            }
+        }
+    }
 }
-}
-board.addEventListener("click",grid)
 
+function addFichaToBoard(casilla) {
+    if (imgsrc && fichaValor > 0) {
+        const carteraValorElement = document.getElementById("cartera-valor");
+        const carteraValor = parseFloat(carteraValorElement.textContent);
+
+        if (carteraValor >= fichaValor) {
+            // Create an image
+            const imagen = document.createElement('img');
+            imagen.style.width = "50px";
+            imagen.src = imgsrc;
+
+            casilla.appendChild(imagen);
+
+            // Subtract the value of the ficha from the cartera
+            carteraValorElement.textContent = (carteraValor - fichaValor).toFixed(2);
+        } else {
+            error.textContent="No tienes mas dinero en la cartera"
+        }
+    }
+}
+
+board.addEventListener("click", grid);
+
+// Wallet
+function acumularCartera(valor) {
+    const carteraValorElement = document.getElementById("cartera-valor");
+    const valorEnCartera = parseFloat(carteraValorElement.textContent) || 0;
+    carteraValorElement.textContent = (valorEnCartera + valor).toFixed(2);
+}

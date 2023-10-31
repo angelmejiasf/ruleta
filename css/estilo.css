@@ -423,6 +423,10 @@ margin: 20px;}
     align-items: center; 
     text-align: center;
 }
+
+.select-token{
+    border:solid 2px red;
+}
 .uno{
     width: 80px;
     grid-column: 1/2;
