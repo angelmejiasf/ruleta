@@ -32,8 +32,10 @@ let titlemoney = document.getElementById("title__money");
 let cartera = document.getElementById("cartera");
 let tokens = document.getElementById("tokens");
 let board = document.getElementById("board");
+let play=document.getElementById("play");
 let fichaValor = 0;
-
+let rouletteimg=document.getElementById("roulette");
+let number=document.getElementById("number")
 
 // Functions
 function generatePhrases() {
@@ -74,6 +76,8 @@ function insertMoney() {
         insert.style.display = "none";
         titlemoney.style.display = "none";
         cartera.style.display = "block";
+        play.style.display="block";
+        
     }
 }
 
@@ -127,9 +131,45 @@ function addFichaToBoard(casilla) {
 
 board.addEventListener("click", grid);
 
+function removeImagesFromBoard() {
+    const boardElement = document.getElementById("board");
+    const images = boardElement.querySelectorAll("p img");
+    
+    images.forEach((image) => {
+        boardElement.removeChild(image);
+    });
+}
+
+
 // Wallet
 function acumularCartera(valor) {
     const carteraValorElement = document.getElementById("cartera-valor");
     const valorEnCartera = parseFloat(carteraValorElement.textContent) || 0;
     carteraValorElement.textContent = (valorEnCartera + valor).toFixed(2);
 }
+
+
+//Roulette
+function playroulette() {
+    rouletteimg.classList.add("roulette-img");
+  
+    setTimeout(function() {
+      rouletteimg.classList.remove("roulette-img");
+    }, 10000);
+  }
+  
+  function generatenumber() {
+    let random = Math.floor(Math.random() * (36 - 1 + 1) + 1);
+    number.textContent = random;
+    
+    removeImagesFromBoard();
+  }
+  
+  let delay = 10000;
+  
+  play.addEventListener("click", function() {
+    
+    setTimeout(generatenumber, delay);
+    playroulette();
+  });
+  

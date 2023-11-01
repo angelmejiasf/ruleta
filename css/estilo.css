@@ -33,6 +33,11 @@ margin: 20px;}
     font-family: roboto medium;
     
 }
+
+.number-generate{
+    font-family: roboto medium;
+    font-size: 40px;
+}
 /* WAYS TO CALL ROULETTE */
 .call-roulette__div{
     width: 65%;
@@ -75,20 +80,29 @@ margin: 20px;}
     text-align: center;
     width: 35%;
     
-  /* }
-  #roulette:hover {
-    animation: move 1s linear 0s infinite;
+  
   }
 
-  #roulette:active {
-    animation-play-state: paused;
-  }
+  .roulette-img{
 
-  @keyframes move {
-    100% {
-      transform: rotateZ(360deg);
-    } */
-  }
+        animation-name: rotate;
+        animation-duration: 10s;
+        animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+        animation-fill-mode: forwards;
+      }
+    
+      @keyframes rotate {
+        from {
+            transform: rotate(0deg);
+          }
+          
+          to {
+            transform: rotate(1800deg);
+          }
+        
+      }
+  
+    
 /*ZONE BOARD */
 .board-div{
     width: 65%;
@@ -381,10 +395,19 @@ margin: 20px;}
 }
 
 /* INSERT MONEY */
+.play{
+    display: none;
+    
+    
+}
 .money{
     width: 35%;
     text-align: center;
     font-family: roboto medium;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .input{
