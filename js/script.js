@@ -1,3 +1,4 @@
+// Arrays
 let frases = [
     "La rompe familias",
     "La roba ilusiones",
@@ -27,21 +28,21 @@ let fichadiez = document.getElementById("diez");
 let fichaveinticinco = document.getElementById("veinticinco");
 let fichacincuenta = document.getElementById("cincuenta");
 let fichacien = document.getElementById("cien");
-let money = document.getElementById("money");
-let titlemoney = document.getElementById("title__money");
 let cartera = document.getElementById("cartera");
 let tokens = document.getElementById("tokens");
 let board = document.getElementById("board");
-let play=document.getElementById("play");
+let play = document.getElementById("play");
 let fichaValor = 0;
-let rouletteimg=document.getElementById("roulette");
-let number=document.getElementById("number")
+let rouletteimg = document.getElementById("roulette");
+let number = document.getElementById("number");
+let carteraValorElement = document.getElementById("cartera-valor");
+let token = document.getElementById("token");
 
 // Functions
 function generatePhrases() {
     for (let i = 0; i < 3; i++) {
         let random = Math.floor(Math.random() * frases.length);
-        let phrasegenerate = frases[random];
+        let phrasegenerate = frases.splice(random, 1)[0];
         phrases.innerHTML += phrasegenerate + "<br>";
     }
 }
@@ -53,31 +54,27 @@ function insertMoney() {
     const inputValue = parseFloat(input.value);
 
     if (isNaN(inputValue) || inputValue < 1) {
-        error.textContent = "Debes insertar más de 1€ para jugar";
+        error.textContent = "Debes insertar al menos 1€ para jugar";
     } else {
         fichauno.style.display = "flex";
         error.textContent = "";
         acumularCartera(inputValue);
 
-        if (inputValue >= 10) {
+        if (carteraValorElement.textContent >= 10) {
             fichadiez.style.display = "flex";
         }
-        if (inputValue >= 25) {
+        if (carteraValorElement.textContent >= 25) {
             fichaveinticinco.style.display = "flex";
         }
-        if (inputValue >= 50) {
+        if (carteraValorElement.textContent >= 50) {
             fichacincuenta.style.display = "flex";
         }
-        if (inputValue >= 100) {
+        if (carteraValorElement.textContent >= 100) {
             fichacien.style.display = "flex";
         }
 
-        input.style.display = "none";
-        insert.style.display = "none";
-        titlemoney.style.display = "none";
-        cartera.style.display = "block";
-        play.style.display="block";
-        
+        play.style.display = "block";
+        input.value = "";
     }
 }
 
@@ -89,14 +86,21 @@ function selectToken(event) {
     if (event.target.tagName == "IMG") {
         imgsrc = event.target.getAttribute("src");
         fichaValor = parseFloat(event.target.getAttribute("value"));
+        const selectedImage = document.querySelector(".select-token");
+        if (selectedImage) {
+            selectedImage.classList.remove("select-token");
+        }
+        event.target.classList.add("select-token");
     }
 }
 
 tokens.addEventListener("click", selectToken);
 
+let juegoencurso = false;
+
 // SELECT GRID
 function grid(event) {
-    if (imgsrc.trim() !== "") {
+    if (!juegoencurso && imgsrc.trim() !== "") {
         if (event.target.tagName === 'P') {
             const casilla = event.target;
 
@@ -108,23 +112,29 @@ function grid(event) {
     }
 }
 
+const apuestas = {};
+
 function addFichaToBoard(casilla) {
     if (imgsrc && fichaValor > 0) {
         const carteraValorElement = document.getElementById("cartera-valor");
         const carteraValor = parseFloat(carteraValorElement.textContent);
+        const casillaValue = casilla.getAttribute("value");
 
         if (carteraValor >= fichaValor) {
-            // Create an image
+            
             const imagen = document.createElement('img');
             imagen.style.width = "50px";
             imagen.src = imgsrc;
 
             casilla.appendChild(imagen);
 
-            // Subtract the value of the ficha from the cartera
+           
             carteraValorElement.textContent = (carteraValor - fichaValor).toFixed(2);
+
+            
+            apuestas[casillaValue] = (apuestas[casillaValue] || 0) + fichaValor;
         } else {
-            error.textContent="No tienes mas dinero en la cartera"
+            error.textContent = "No tienes suficiente dinero en la cartera";
         }
     }
 }
@@ -133,43 +143,65 @@ board.addEventListener("click", grid);
 
 function removeImagesFromBoard() {
     const boardElement = document.getElementById("board");
-    const images = boardElement.querySelectorAll("p img");
-    
-    images.forEach((image) => {
-        boardElement.removeChild(image);
-    });
-}
+    const paragraphs = boardElement.getElementsByTagName("p");
 
+    for (let i = 0; i < paragraphs.length; i++) {
+        const images = paragraphs[i].getElementsByTagName("img");
+        for (let j = images.length - 1; j >= 0; j--) {
+            paragraphs[i].removeChild(images[j]);
+        }
+    }
+}
 
 // Wallet
 function acumularCartera(valor) {
-    const carteraValorElement = document.getElementById("cartera-valor");
     const valorEnCartera = parseFloat(carteraValorElement.textContent) || 0;
     carteraValorElement.textContent = (valorEnCartera + valor).toFixed(2);
 }
 
-
-//Roulette
+// Roulette
 function playroulette() {
+    juegoencurso = true;
     rouletteimg.classList.add("roulette-img");
-  
-    setTimeout(function() {
-      rouletteimg.classList.remove("roulette-img");
+
+    setTimeout(function () {
+        rouletteimg.classList.remove("roulette-img");
+        juegoencurso = false;
     }, 10000);
-  }
-  
-  function generatenumber() {
-    let random = Math.floor(Math.random() * (36 - 1 + 1) + 1);
+}
+
+function generatenumber() {
+    let random = Math.floor(Math.random() * 37); 
     number.textContent = random;
+
+   
+    const casilla = document.querySelector(`.numbers-${random}`);
     
+    
+    let colorCasilla = "verde"; 
+    if (casilla) {
+        const casillaValue = casilla.getAttribute("data-value");
+        const colorPart = casillaValue.split(" ")[0];
+        if (colorPart === "red" || colorPart === "black") {
+            colorCasilla = colorPart;
+        }
+    }
+
+   
+    const apuestaGanadora = apuestas[colorCasilla];
+
+    if (apuestaGanadora) {
+       
+        carteraValorElement.textContent = (parseFloat(carteraValorElement.textContent) + apuestaGanadora * 2).toFixed(2);
+    }
+
     removeImagesFromBoard();
-  }
-  
-  let delay = 10000;
-  
-  play.addEventListener("click", function() {
-    
+}
+
+
+let delay = 10000;
+
+play.addEventListener("click", function () {
     setTimeout(generatenumber, delay);
     playroulette();
-  });
-  
+});

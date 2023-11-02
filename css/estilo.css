@@ -22,7 +22,7 @@ margin: 20px;}
     display: flex;
     margin: 0 auto;
     justify-content: space-between;
-    margin-bottom: 40px;
+    margin-bottom: 0px;
 }
 /* NUMBER */
 .number-div{
@@ -36,7 +36,7 @@ margin: 20px;}
 
 .number-generate{
     font-family: roboto medium;
-    font-size: 40px;
+    font-size: 30px;
 }
 /* WAYS TO CALL ROULETTE */
 .call-roulette__div{
@@ -391,7 +391,7 @@ margin: 20px;}
     margin: 0 auto;
     justify-content: space-between;
     
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
 /* INSERT MONEY */
@@ -427,9 +427,7 @@ margin: 20px;}
     color: red;
     font-family: roboto medium;
 }
-.cartera{
-    display: none;
-}
+
 /* TOKENS */
 .tokens{
     display: grid;
