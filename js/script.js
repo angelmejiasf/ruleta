@@ -118,20 +118,20 @@ function addFichaToBoard(casilla) {
     if (imgsrc && fichaValor > 0) {
         const carteraValorElement = document.getElementById("cartera-valor");
         const carteraValor = parseFloat(carteraValorElement.textContent);
-        const casillaValue = casilla.getAttribute("value");
 
         if (carteraValor >= fichaValor) {
-            
+            // Crear una imagen
             const imagen = document.createElement('img');
             imagen.style.width = "50px";
             imagen.src = imgsrc;
 
             casilla.appendChild(imagen);
 
-           
+            // Restar el valor de la ficha de la cartera
             carteraValorElement.textContent = (carteraValor - fichaValor).toFixed(2);
 
-            
+            // Registrar la apuesta en el objeto apuestas
+            const casillaValue = casilla.getAttribute("value");
             apuestas[casillaValue] = (apuestas[casillaValue] || 0) + fichaValor;
         } else {
             error.textContent = "No tienes suficiente dinero en la cartera";
@@ -171,32 +171,70 @@ function playroulette() {
 }
 
 function generatenumber() {
-    let random = Math.floor(Math.random() * 37); 
-    number.textContent = random;
+    let random = Math.floor(Math.random() * 37);
+    number.textContent = random.toString();
 
-   
-    const casilla = document.querySelector(`.numbers-${random}`);
-    
-    
-    let colorCasilla = "verde"; 
-    if (casilla) {
-        const casillaValue = casilla.getAttribute("data-value");
-        const colorPart = casillaValue.split(" ")[0];
-        if (colorPart === "red" || colorPart === "black") {
-            colorCasilla = colorPart;
+    const casillasGanadoras = document.querySelectorAll(`[value]`);
+
+
+    let haGanado = false;
+
+    casillasGanadoras.forEach(casillaGanadora => {
+        const valores = casillaGanadora.getAttribute("value").split(' ');
+
+        if (valores.includes(random.toString())) {
+            // Verificar si hay una apuesta en la casilla ganadora
+            const apuestaGanadora = apuestas[casillaGanadora.getAttribute("value")];
+           
+            if (apuestaGanadora) {
+                const cantidadGanada = apuestaGanadora * 2;
+                // Actualizar el contenido del mensaje de cantidad ganada
+                const cantidadGanadaElement = document.getElementById("cantidad-ganada");
+                cantidadGanadaElement.textContent = cantidadGanada.toFixed(2);
+
+                // Mostrar el mensaje de cantidad ganada
+                const mensajeGanancia = document.getElementById("mensaje-ganancia");
+                mensajeGanancia.style.display = "block";
+                
+                // Agregar la cantidad ganada a la cartera
+                carteraValorElement.textContent = (parseFloat(carteraValorElement.textContent) + cantidadGanada).toFixed(2);
+
+                // Eliminar la apuesta en la casilla ganadora
+                delete apuestas[casillaGanadora.getAttribute("value")];
+
+                // Indicar que se ha ganado
+                haGanado = true;
+            }
         }
+    });
+
+    // Mostrar el mensaje "No has ganado nada" si no ha habido ganancias
+    if (!haGanado) {
+        const mensajeNoGanado = document.getElementById("mensaje-no-ganado");
+        
+        mensajeNoGanado.style.display = "block";
+        setTimeout(function () {
+            
+            mensajeNoGanado.style.display = "none";
+        }, 3000); // Ocultar el mensaje después de 3 segundos
     }
-
-   
-    const apuestaGanadora = apuestas[colorCasilla];
-
-    if (apuestaGanadora) {
-       
-        carteraValorElement.textContent = (parseFloat(carteraValorElement.textContent) + apuestaGanadora * 2).toFixed(2);
+    if (haGanado) {
+        const mensajeGanancia = document.getElementById("mensaje-ganancia");
+        setTimeout(function () {
+            mensajeGanancia.style.display = "none";
+        }, 3000); // Ocultar el mensaje después de 3 segundos
     }
 
     removeImagesFromBoard();
+
+    setTimeout(function () {
+        number.textContent = "";
+    }, 3000);
 }
+
+
+
+
 
 
 let delay = 10000;
@@ -205,3 +243,5 @@ play.addEventListener("click", function () {
     setTimeout(generatenumber, delay);
     playroulette();
 });
+
+

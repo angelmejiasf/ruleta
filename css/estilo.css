@@ -5,14 +5,16 @@
 
 /* BACKGROUND GENERAL */
 body{
-    background-color: #004A22;}
+    background-color: #004A22;
+   
+}
 
 /*ZONE HEADER */
 
 /* TITLE */
 .h1{font-family: roboto medium;
 text-align: center;
-background-color: gray;
+background-color: white;
 margin: 20px;}
 
 /* CONTAINER ABOVE THE GAME */
@@ -31,7 +33,7 @@ margin: 20px;}
 }
 .number{
     font-family: roboto medium;
-    
+    color: white;
 }
 
 .number-generate{
@@ -45,7 +47,7 @@ margin: 20px;}
 }
 .call-roulette{
     
-    
+    color: white;
     font-family: roboto medium;
     
 }
@@ -111,7 +113,7 @@ margin: 20px;}
     display: grid;
     text-align: center;
     grid-template-columns: repeat(14,1fr);
-    grid-template-rows: repeat(5,80px);
+    grid-template-rows: repeat(4,80px);
     
     
     
@@ -383,6 +385,13 @@ margin: 20px;}
             grid-row:5/6;
         }
 
+.mensaje{
+    font-size: 20px;
+    font-family: roboto medium;
+    text-align: center;
+    padding-top: 30px;
+    color: white;
+}
 /* BELOW THE GAME */
 .container-below{
     max-width: 1500px;
@@ -395,10 +404,20 @@ margin: 20px;}
 }
 
 /* INSERT MONEY */
+.title__money{
+    color: white;
+}
 .play{
     display: none;
+    background-color: black;
+    color: white;
+    font-family: roboto medium;
     
     
+}
+.play:hover{
+    background-color: red;
+    /* color: black; */
 }
 .money{
     width: 35%;
@@ -412,20 +431,30 @@ margin: 20px;}
 
 .input{
     background-color: transparent;
-    /* border-radius: 33%; */
+    border-radius: 50%;
     text-align: center;
     color: white;
     border:transparent;
 }
 
+
 .insert{
     font-family: roboto medium;
-    background-color: transparent;
-    
+    background-color: black;
+    color: white;
+}
+.insert:hover{
+    background-color: red;
+
 }
 .error{
     color: red;
     font-family: roboto medium;
+}
+
+.cartera{
+    color: white;
+    
 }
 
 /* TOKENS */
