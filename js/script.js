@@ -52,10 +52,12 @@ document.addEventListener("DOMContentLoaded", generatePhrases);
 // INSERT MONEY
 function insertMoney() {
     const inputValue = parseFloat(input.value);
-
+    const maxAmount=250;
     if (isNaN(inputValue) || inputValue < 1) {
         error.textContent = "Debes insertar al menos 1€ para jugar";
-    } else {
+    } else if (inputValue > maxAmount) {
+        error.textContent = "La cantidad máxima que puedes insertar es de 250€";
+    }else {
         fichauno.style.display = "flex";
         error.textContent = "";
         acumularCartera(inputValue);
@@ -135,12 +137,18 @@ function addFichaToBoard(casilla) {
             apuestas[casillaValue] = (apuestas[casillaValue] || 0) + fichaValor;
         } else {
             error.textContent = "No tienes suficiente dinero en la cartera";
+            setTimeout(function () {
+                error.textContent=""
+                
+            }, 3000);
+            
         }
     }
 }
 
 board.addEventListener("click", grid);
 
+// REMOVE IMAGES FROM BARD AFTER NUMBER GENERATE
 function removeImagesFromBoard() {
     const boardElement = document.getElementById("board");
     const paragraphs = boardElement.getElementsByTagName("p");
@@ -155,8 +163,17 @@ function removeImagesFromBoard() {
 
 // Wallet
 function acumularCartera(valor) {
-    const valorEnCartera = parseFloat(carteraValorElement.textContent) || 0;
+    
+    if(carteraValorElement>10000){
+        error.textContent="No puedes tener mas dinero en la cartera"
+        setTimeout(function () {
+            error.textContent=""
+        }, 3000);
+        
+    }else{
+        const valorEnCartera = parseFloat(carteraValorElement.textContent) || 0;
     carteraValorElement.textContent = (valorEnCartera + valor).toFixed(2);
+    }
 }
 
 // Roulette
@@ -170,6 +187,7 @@ function playroulette() {
     }, 10000);
 }
 
+// GENERATE NUMBER
 function generatenumber() {
     let random = Math.floor(Math.random() * 37);
     number.textContent = random.toString();
@@ -179,15 +197,28 @@ function generatenumber() {
 
     let haGanado = false;
 
+    // check if the generated number matches any value
     casillasGanadoras.forEach(casillaGanadora => {
         const valores = casillaGanadora.getAttribute("value").split(' ');
 
         if (valores.includes(random.toString())) {
-            // Verificar si hay una apuesta en la casilla ganadora
             const apuestaGanadora = apuestas[casillaGanadora.getAttribute("value")];
-           
+
             if (apuestaGanadora) {
-                const cantidadGanada = apuestaGanadora * 2;
+                let factorGanancia = 1;
+
+                // Verifica las clases de la casilla ganadora y establece el factor de ganancia
+                if (casillaGanadora.classList.contains("numbers") || casillaGanadora.classList.contains("cero")) {
+                    factorGanancia = 36;
+                } else if (casillaGanadora.classList.contains("set-one") || casillaGanadora.classList.contains("set-two-1")
+                || casillaGanadora.classList.contains("set-two-2") || casillaGanadora.classList.contains("set-two-3")) {
+                    factorGanancia = 2;
+                // Puedes agregar más condiciones para otras clases de casillas si es necesario
+                }
+
+                // Calcular la cantidad ganada
+                const cantidadGanada = apuestaGanadora * factorGanancia;
+
                 // Actualizar el contenido del mensaje de cantidad ganada
                 const cantidadGanadaElement = document.getElementById("cantidad-ganada");
                 cantidadGanadaElement.textContent = cantidadGanada.toFixed(2);
@@ -195,7 +226,7 @@ function generatenumber() {
                 // Mostrar el mensaje de cantidad ganada
                 const mensajeGanancia = document.getElementById("mensaje-ganancia");
                 mensajeGanancia.style.display = "block";
-                
+
                 // Agregar la cantidad ganada a la cartera
                 carteraValorElement.textContent = (parseFloat(carteraValorElement.textContent) + cantidadGanada).toFixed(2);
 
@@ -208,7 +239,7 @@ function generatenumber() {
         }
     });
 
-    // Mostrar el mensaje "No has ganado nada" si no ha habido ganancias
+    
     if (!haGanado) {
         const mensajeNoGanado = document.getElementById("mensaje-no-ganado");
         
@@ -216,13 +247,13 @@ function generatenumber() {
         setTimeout(function () {
             
             mensajeNoGanado.style.display = "none";
-        }, 3000); // Ocultar el mensaje después de 3 segundos
+        }, 3000); 
     }
     if (haGanado) {
         const mensajeGanancia = document.getElementById("mensaje-ganancia");
         setTimeout(function () {
             mensajeGanancia.style.display = "none";
-        }, 3000); // Ocultar el mensaje después de 3 segundos
+        }, 3000); 
     }
 
     removeImagesFromBoard();
