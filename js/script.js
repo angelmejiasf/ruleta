@@ -52,12 +52,12 @@ document.addEventListener("DOMContentLoaded", generatePhrases);
 // INSERT MONEY
 function insertMoney() {
     const inputValue = parseFloat(input.value);
-    const maxAmount=250;
+    const maxAmount = 250;
     if (isNaN(inputValue) || inputValue < 1) {
         error.textContent = "Debes insertar al menos 1€ para jugar";
     } else if (inputValue > maxAmount) {
         error.textContent = "La cantidad máxima que puedes insertar es de 250€";
-    }else {
+    } else {
         fichauno.style.display = "flex";
         error.textContent = "";
         acumularCartera(inputValue);
@@ -114,7 +114,7 @@ function grid(event) {
     }
 }
 
-const apuestas = {};
+
 
 function addFichaToBoard(casilla) {
     if (imgsrc && fichaValor > 0) {
@@ -122,26 +122,26 @@ function addFichaToBoard(casilla) {
         const carteraValor = parseFloat(carteraValorElement.textContent);
 
         if (carteraValor >= fichaValor) {
-            // Crear una imagen
+
             const imagen = document.createElement('img');
             imagen.style.width = "50px";
             imagen.src = imgsrc;
 
             casilla.appendChild(imagen);
 
-            // Restar el valor de la ficha de la cartera
+
             carteraValorElement.textContent = (carteraValor - fichaValor).toFixed(2);
 
-            // Registrar la apuesta en el objeto apuestas
+
             const casillaValue = casilla.getAttribute("value");
             apuestas[casillaValue] = (apuestas[casillaValue] || 0) + fichaValor;
         } else {
             error.textContent = "No tienes suficiente dinero en la cartera";
             setTimeout(function () {
-                error.textContent=""
-                
+                error.textContent = ""
+
             }, 3000);
-            
+
         }
     }
 }
@@ -163,16 +163,16 @@ function removeImagesFromBoard() {
 
 // Wallet
 function acumularCartera(valor) {
-    
-    if(carteraValorElement>10000){
-        error.textContent="No puedes tener mas dinero en la cartera"
+
+    if (carteraValorElement > 10000) {
+        error.textContent = "No puedes tener mas dinero en la cartera"
         setTimeout(function () {
-            error.textContent=""
+            error.textContent = ""
         }, 3000);
-        
-    }else{
+
+    } else {
         const valorEnCartera = parseFloat(carteraValorElement.textContent) || 0;
-    carteraValorElement.textContent = (valorEnCartera + valor).toFixed(2);
+        carteraValorElement.textContent = (valorEnCartera + valor).toFixed(2);
     }
 }
 
@@ -188,16 +188,21 @@ function playroulette() {
 }
 
 // GENERATE NUMBER
+
+let apuestas = {};
+
 function generatenumber() {
+
     let random = Math.floor(Math.random() * 37);
     number.textContent = random.toString();
 
+
+    removeImagesFromBoard();
+
+
     const casillasGanadoras = document.querySelectorAll(`[value]`);
-
-
     let haGanado = false;
 
-    // check if the generated number matches any value
     casillasGanadoras.forEach(casillaGanadora => {
         const valores = casillaGanadora.getAttribute("value").split(' ');
 
@@ -207,66 +212,71 @@ function generatenumber() {
             if (apuestaGanadora) {
                 let factorGanancia = 1;
 
-                // Verifica las clases de la casilla ganadora y establece el factor de ganancia
-                if (casillaGanadora.classList.contains("numbers") || casillaGanadora.classList.contains("cero")) {
+
+                if (casillaGanadora.classList.contains("background-red") || casillaGanadora.classList.contains("cero") ||
+                casillaGanadora.classList.contains("background-black"))  {
                     factorGanancia = 36;
                 } else if (casillaGanadora.classList.contains("set-one") || casillaGanadora.classList.contains("set-two-1")
-                || casillaGanadora.classList.contains("set-two-2") || casillaGanadora.classList.contains("set-two-3")) {
+                    || casillaGanadora.classList.contains("set-two-2") || casillaGanadora.classList.contains("set-two-3")) {
                     factorGanancia = 2;
-                // Puedes agregar más condiciones para otras clases de casillas si es necesario
+
                 }
 
-                // Calcular la cantidad ganada
+
                 const cantidadGanada = apuestaGanadora * factorGanancia;
 
-                // Actualizar el contenido del mensaje de cantidad ganada
+
                 const cantidadGanadaElement = document.getElementById("cantidad-ganada");
                 cantidadGanadaElement.textContent = cantidadGanada.toFixed(2);
 
-                // Mostrar el mensaje de cantidad ganada
+
                 const mensajeGanancia = document.getElementById("mensaje-ganancia");
                 mensajeGanancia.style.display = "block";
 
-                // Agregar la cantidad ganada a la cartera
+
                 carteraValorElement.textContent = (parseFloat(carteraValorElement.textContent) + cantidadGanada).toFixed(2);
 
-                // Eliminar la apuesta en la casilla ganadora
-                delete apuestas[casillaGanadora.getAttribute("value")];
 
-                // Indicar que se ha ganado
                 haGanado = true;
             }
         }
     });
 
-    
+
+    if (haGanado) {
+        for (const key of Object.keys(apuestas)) {
+            if (apuestas[key] > 0) {
+                delete apuestas[key];
+            }
+        }
+    } else {
+        for (const key of Object.keys(apuestas)) {
+            if (apuestas[key] > 0) {
+                delete apuestas[key];
+            }
+        }
+    }
+
+
     if (!haGanado) {
         const mensajeNoGanado = document.getElementById("mensaje-no-ganado");
-        
         mensajeNoGanado.style.display = "block";
         setTimeout(function () {
-            
             mensajeNoGanado.style.display = "none";
-        }, 3000); 
-    }
-    if (haGanado) {
+        }, 3000);
+    } else {
+
         const mensajeGanancia = document.getElementById("mensaje-ganancia");
         setTimeout(function () {
             mensajeGanancia.style.display = "none";
-        }, 3000); 
+        }, 3000);
     }
 
-    removeImagesFromBoard();
 
     setTimeout(function () {
         number.textContent = "";
     }, 3000);
 }
-
-
-
-
-
 
 let delay = 10000;
 

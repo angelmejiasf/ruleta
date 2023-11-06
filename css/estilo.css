@@ -418,7 +418,7 @@ margin: 20px;}
 }
 .play:hover{
     background-color: red;
-    /* color: black; */
+    
 }
 .money{
     width: 35%;
@@ -464,7 +464,7 @@ margin: 20px;}
     grid-template-columns: repeat(5,150px);
     width: 65%;
     justify-content: center;
-    /* display: none; */
+   
     
     
 }
@@ -476,7 +476,8 @@ margin: 20px;}
 }
 
 .select-token{
-    border:solid 2px red;
+    border:solid 2px white;
+    border-radius: 50%;
 }
 .uno{
     width: 80px;
